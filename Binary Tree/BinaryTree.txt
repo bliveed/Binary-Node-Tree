@@ -1,0 +1,146 @@
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+void printTree();
+const int MAX_NODES = 15;
+double node[MAX_NODES];
+void display(double anItem)
+{
+ cout << "Displaying item - " << anItem << endl;
+}
+bool addNode(double newNum,int place){
+if(node[place]==NULL){
+node[place] = newNum;
+}
+else
+cout<<"This place is not available."<<endl;
+}
+
+double getRightNode(int index) {
+ if (node[index] != 0 && ((2 * index) + 1) <= MAX_NODES) {
+ return (2 * index) + 1;
+ }
+ return -1;
+}
+double getLeftNode(int index) {
+ if (node[index] != 0 && (2 * index) <= MAX_NODES) {
+ return 2 * index;
+ }
+ else
+ return 0;
+ return -1;
+}
+bool deleteNode(int nodeForDelete){
+if(nodeForDelete==0 || nodeForDelete<0){
+cout<<"You are trying to delete root or your number does not 
+exist!!";
+}
+else{
+for(int t = 0; t<MAX_NODES; t++){
+if(node[t] == node[nodeForDelete]){
+node[nodeForDelete] = NULL;
+return true;
+}
+}
+}
+}
+double findNode(double findNum) {
+
+ for (int a = 0; a < MAX_NODES; a++) {
+ if (node[a] == findNum) {
+ return a;
+ }
+ else{
+ return 0;
+}
+ }
+}
+double postorder(int index)
+{
+ if (node[index] != 0 && index > 0)
+ {
+ postorder(getLeftNode(index));
+ postorder(getRightNode(index));
+ cout << node[index] << " - ";
+ } 
+}
+void printTree(double tree){
+cout<<"\n";
+cout<<" \t\t";
+for(int k =0; k<MAX_NODES;k++){
+if (node[k]!=0.0){
+cout<<" \t";
+cout << node[k]<<endl; 
+cout << " \t /"<<endl; 
+}
+else{
+cout << " "<<endl; 
+}
+
+}
+}
+int main() {
+double newNum, findNumber;
+int deletingNode,nod, selection;
+double tree1 = node[MAX_NODES];
+for(int i =0; i<MAX_NODES;i++){
+cout<<"...Please enter "<<i <<" th node of tree..."<<endl;
+double a;
+cin>>a;
+addNode(a,i);
+}
+cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$ HERE IS YOUR OPTIONS $$$$$$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$ 1) Add number to tree $$$$$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$ 2) Delete number from tree $$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$ 3) Print tree $$$$$$$$$$$$$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$ 4) Fing number from tree $$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$ 5) Postorder Traversal $$$$$$$$$$$
+$"<<endl;
+cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$"<<endl;
+cout<<endl<<"Please enter option number which you choose...";
+cin>>selection;
+while(selection != 0){
+ if(selection == 1){
+
+cout<<"Please enter number and place for add"<<endl;
+cin>>newNum;
+cin>>nod;
+addNode(newNum,nod);
+}
+else if(selection == 2){
+cout<<"Which node you want to delete"<<endl;
+cin>>deletingNode;
+deleteNode(deletingNode);
+if(deleteNode(deletingNode))
+cout<<"Your node is deleted!"<<endl;
+}
+else if(selection == 3){
+cout<<"There is your Binary Tree: "<<endl;
+printTree(tree1);
+}
+else if(selection == 4){
+cout<<"Which number's place you want to find?";
+cin>>findNumber;
+cout<<"Your number's index is: ";
+findNode(findNumber);
+}
+else if(selection == 5){
+cout<<"Here is your postorder traversal: "<<endl;
+postorder(1);
+return 0;
+}
+else
+cout<<"Wrong input. Please try again!";
+}
+return 0;
+}
